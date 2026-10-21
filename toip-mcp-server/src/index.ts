@@ -49,7 +49,7 @@ server.tool(
         `ID: ${m.doc_id} | ${m.content_type} | ${units.join(', ')}`,
         `Source: ${m.source_system}${m.source_url ? ` — ${m.source_url}` : ''}`,
         `Identifier: ${m.identifier}`,
-        `Score: ${(1 - r.score).toFixed(3)}`,
+        `Score: ${r.score.toFixed(3)}`,
         ``,
         m.chunk_text as string,
         `---`,
