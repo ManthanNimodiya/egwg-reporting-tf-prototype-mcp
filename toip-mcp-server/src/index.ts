@@ -25,6 +25,13 @@ server.tool(
     filter_wg: z.string().optional().describe('Filter by working group (e.g. "Ecosystem Governance Working Group")'),
   },
   async ({ query, top_k, filter_wg }) => {
+    if (!(await index.isIndexCreated())) {
+      return {
+        content: [{ type: 'text' as const, text: 'No index found. Run `npm run ingest` first.' }],
+        isError: true,
+      }
+    }
+
     const vector = await embed(query)
     const results = await index.queryItems(vector, query, top_k * 3)
 
